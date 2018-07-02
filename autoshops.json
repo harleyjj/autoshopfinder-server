@@ -1,0 +1,67 @@
+[
+    {
+        "name": "Kako Transmissions",
+        "address":{
+            "street": "15430 S Vermont Ave",
+            "city": "Gardena",
+            "state": "CA",
+            "zip": "90247"
+        },
+        "phone": "(310) 515-0008",
+        "hours": {
+            "monday": "8AM-5PM",
+            "tuesday": "8AM-5PM",
+            "wednesday": "8AM-5PM",
+            "thursday": "8AM-5PM",
+            "friday": "8AM-5PM",
+            "saturday": "8AM-12PM",
+            "sunday": "Closed"
+        },
+        "services": [
+            "transmissions",
+            "brakes",
+            "oil change"
+        ]
+    },
+    {
+        "name": "Pep Boys Auto Parts & Services",
+        "address":{
+            "street": "1135 E Colorado Blvd",
+            "city": "Pasadena",
+            "state": "CA",
+            "zip": "91106"
+        },
+        "phone": "(626) 793-8181",
+        "hours": {
+            "monday": "7:30AM-8PM",
+            "tuesday": "7:30AM-8PM",
+            "wednesday": "7:30AM-8PM",
+            "thursday": "7:30AM-8PM",
+            "friday": "7:30AM-8PM",
+            "saturday": "7:30AM-8PM",
+            "sunday": "9AM-6PM"
+        },
+        "services": [
+            "oil changes",
+            "battery installation",
+            "filter replacement",
+            "fluid exchanges",
+            "fuel system services",
+            "scheduled OE maintenance",
+            "winter prep package",
+            "summer prep package",
+            "wheel alignment",
+            "tire repair",
+            "tire installation",
+            "air conditioning and heating system",
+            "belts and hoses",
+            "brake services",
+            "diagnostic and evaluation",
+            "check engine light code pull",
+            "shocks, struts, steering & suspension",
+            "performance services",
+            "car audio installation",
+            "state inspection"
+        ]
+    }
+]
