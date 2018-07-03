@@ -7,7 +7,7 @@ const morgan = require('morgan');
 const autoshops = require('./autoshops');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
-const {dbConnect} = require('./db-knex');
+const {dbConnect, dbGet} = require('./db-knex');
 
 const app = express();
 
@@ -26,9 +26,56 @@ app.use(
   })
 );
 
-app.get('/', (req, res) => {
-  const res_data = autoshops.map(autoshop => autoshop.name);
-  res.json(res_data);
+app.get('/', (req, res, next) => {
+  dbGet().select(
+    'id', 
+    'name',
+    'street',
+    'city',
+    'state',
+    'zip',
+    'phone',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday',
+    'sunday',
+    'oilchanges',
+    'batteryinstallation',
+    'filterreplacement',
+    'fluidexchanges',
+    'fuelsystemservices',
+    'scheduledoemaintenance',
+    'winterpreppackage',
+    'summerpreppackage',
+    'wheelalignment',
+    'tirerepair',
+    'tireinstallation',
+    'acheat',
+    'beltsandhoses',
+    'brakeservices',
+    'diagnostics',
+    'checkengine',
+    'suspension',
+    'performance',
+    'caraudio',
+    'stateinspection',
+    'transmissions'
+  )
+    .from('autoshops')
+    .orderBy('id')
+    .then(list => {
+      if(list) {
+        res.json(list);
+      } else {
+        next();
+      }
+    })
+    .catch(err => {
+      next(err);
+    });
 });
 
 app.post('/', (req, res) => {
