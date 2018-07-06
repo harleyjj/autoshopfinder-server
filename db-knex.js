@@ -17,8 +17,8 @@ function dbDisconnect() {
   return knex.destroy();
 }
 
-function dbGet() {
-  return knex;
+function dbGet(collection=null) {
+  return knex(collection);
 }
 
 module.exports = {

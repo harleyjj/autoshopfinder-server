@@ -1,13 +1,18 @@
 'use strict';
 
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const passport = require('passport');
 
-const autoshops = require('./autoshops');
+const { router: usersRouter } = require('./users');
+const { router: authRouter, localStrategy, jwtStrategy } = require('./auth');
+const { router: shopseekersRouter} = require('./shopseekers');
+const { router: shopsRouter} = require('./shops');
 
 const { PORT, CLIENT_ORIGIN } = require('./config');
-const {dbConnect, dbGet} = require('./db-knex');
+const {dbConnect} = require('./db-knex');
 
 const app = express();
 
@@ -26,63 +31,16 @@ app.use(
   })
 );
 
-app.get('/', (req, res, next) => {
-  dbGet().select(
-    'id', 
-    'name',
-    'street',
-    'city',
-    'state',
-    'zip',
-    'phone',
-    'monday',
-    'tuesday',
-    'wednesday',
-    'thursday',
-    'friday',
-    'saturday',
-    'sunday',
-    'oilchanges',
-    'batteryinstallation',
-    'filterreplacement',
-    'fluidexchanges',
-    'fuelsystemservices',
-    'scheduledoemaintenance',
-    'winterpreppackage',
-    'summerpreppackage',
-    'wheelalignment',
-    'tirerepair',
-    'tireinstallation',
-    'acheat',
-    'beltsandhoses',
-    'brakeservices',
-    'diagnostics',
-    'checkengine',
-    'suspension',
-    'performance',
-    'caraudio',
-    'stateinspection',
-    'transmissions'
-  )
-    .from('autoshops')
-    .orderBy('id')
-    .then(list => {
-      if(list) {
-        res.json(list);
-      } else {
-        next();
-      }
-    })
-    .catch(err => {
-      next(err);
-    });
-});
+passport.use(localStrategy);
+passport.use(jwtStrategy);
 
-app.post('/', (req, res) => {
-  const {name, address, phone, hours, services} = req.body;
-  const new_shop = {name, address, phone, hours, services};
-  autoshops.push(new_shop);
-  res.json(new_shop.name);
+app.use('/api/users/', usersRouter);
+app.use('/api/auth/', authRouter);
+app.use('/api/shopseekers/', shopseekersRouter);
+app.use('/api/shops/', shopsRouter);
+
+app.use('*', (req, res) => {
+  return res.status(404).json({ message: 'Not Found' });
 });
 
 function runServer(port = PORT) {

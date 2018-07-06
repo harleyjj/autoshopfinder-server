@@ -1,4 +1,15 @@
 DROP TABLE IF EXISTS autoshops;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users (
+    id serial PRIMARY KEY,
+    username text UNIQUE,
+    password text,
+    shopName text,
+    created timestamp DEFAULT now()
+);
+
+INSERT INTO users 
 
 CREATE TABLE autoshops (
   id serial PRIMARY KEY,
