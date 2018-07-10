@@ -122,7 +122,10 @@ router.post('/', jsonParser, (req, res) => {
         username,
         password: hash,
         shopname
-      });
+      })
+        .then(() => {
+          return [{username,shopname}];
+        });
     })
     .then(users => {
       console.log('transmit result');

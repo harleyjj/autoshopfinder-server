@@ -64,7 +64,7 @@ router.get('/:username', jsonParser, (req, res, next) => {
 });
 
 // Put update an item
-router.put('/:username', (req, res, next) => {
+router.put('/:username', jsonParser, (req, res, next) => {
   const username = req.params.username;
 
   const { 
@@ -166,7 +166,7 @@ router.put('/:username', (req, res, next) => {
     });
 });
 
-router.post('/', (req, res, next) => {
+router.post('/', jsonParser, (req, res, next) => {
   const { username, shopname } = req.body;
   //console.log(`folder id's type is ${typeof folderId}`);
   const newItem = { username, name: shopname };
@@ -197,7 +197,7 @@ router.post('/', (req, res, next) => {
     });
 });
 
-router.delete('/:username', (req, res, next) => {
+router.delete('/:username', jsonParser, (req, res, next) => {
   const username = req.params.username;
 
   dbGet('autoshops')
