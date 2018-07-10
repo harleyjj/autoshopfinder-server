@@ -37,10 +37,20 @@ passport.use(jwtStrategy);
 app.use('/api/users/', usersRouter);
 app.use('/api/auth/', authRouter);
 app.use('/api/shopseekers/', shopseekersRouter);
-app.use('/api/shops/', shopsRouter);
+app.use('/api/protected/', shopsRouter);
 
 app.use('*', (req, res) => {
   return res.status(404).json({ message: 'Not Found' });
+});
+
+app.use((err, req, res, next) => {
+  if (err.status) {
+    const errBody = Object.assign({}, err, { message: err.message });
+    res.status(err.status).json(errBody);
+  } else {
+    console.error(err);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
 });
 
 function runServer(port = PORT) {

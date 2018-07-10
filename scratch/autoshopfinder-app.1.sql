@@ -9,11 +9,10 @@ CREATE TABLE users (
     created timestamp DEFAULT now()
 );
 
-INSERT INTO users 
-
 CREATE TABLE autoshops (
   id serial PRIMARY KEY,
   name text NOT NULL,
+  username text UNIQUE,
   street text,
   city text,
   state text, 
@@ -53,6 +52,7 @@ CREATE TABLE autoshops (
 INSERT INTO autoshops
     (
         name,
+        username,
         street,
         city,
         state, 
@@ -89,6 +89,7 @@ INSERT INTO autoshops
     ) VALUES
     (
         'Kako Transmissions',
+        'deleteme',
         '15430 S Vermont Ave',
         'Gardena',
         'CA',
@@ -125,6 +126,7 @@ INSERT INTO autoshops
     ),
     (
         'Pep Boys Auto Parts & Services',
+        'deleteme0',
         '1135 E Colorado Blvd',
         'Pasadena',
         'CA',
