@@ -68,7 +68,7 @@ router.put('/:username', jsonParser, (req, res, next) => {
   const username = req.params.username;
 
   const { 
-    shopname,
+    name,
     street,
     city,
     state,
@@ -105,7 +105,7 @@ router.put('/:username', jsonParser, (req, res, next) => {
   } = req.body;
   //console.log(`folder id's type is ${typeof folderId}`);
   const updateObj = { 
-    name: shopname,
+    name,
     street,
     city,
     state,

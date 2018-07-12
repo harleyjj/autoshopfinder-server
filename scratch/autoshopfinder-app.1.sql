@@ -25,6 +25,7 @@ CREATE TABLE autoshops (
   friday text,
   saturday text,
   sunday text,
+  email text,
   oilChanges boolean,
   batteryInstallation boolean,
   filterReplacement boolean,
